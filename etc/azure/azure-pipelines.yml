@@ -1,0 +1,379 @@
+trigger:
+  tags:
+    include:
+      - "*.*.*"
+
+resources:
+  repositories:
+    - repository: abp-framework
+      type: github
+      endpoint: github.com_skoc10
+      name: abpframework/abp
+      ref: dev
+    - repository: devops
+      type: github
+      endpoint: github.com_skoc10
+      name: volosoft/devops
+      ref: master
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'volosoft-reg'
+  buildContextBasePath: '$(Build.SourcesDirectory)'
+  # tag: $[replace(variables['Build.SourceBranch'], 'refs/tags/', '')]
+  tag: $(Build.BuildNumber)
+  DOCKER_BUILDKIT: 1
+
+pool:
+  name: aks-deployer-agent
+
+stages:
+- stage: Package
+  displayName: Package
+  jobs:
+  - job: Build
+    timeoutInMinutes: 120
+    displayName: Demo MS Build and Push
+    pool:
+      name: aks-deployer-agent
+    steps:
+    - checkout: self
+    - checkout: abp-framework
+    - checkout: devops
+
+    # - script: |
+    #     dotnet tool update -g Volo.Abp.Cli
+    #   displayName: 'Update ABP CLI'
+
+    # - script: |
+    #     export PATH="$PATH:/root/.dotnet/tools"
+    #     abp --version
+    #     cd $(buildContextBasePath)/volo/abp/templates/ms && abp install-libs
+    #   displayName: 'Use ABP CLI'
+
+
+    - task: Docker@2
+      displayName: Build Base Image
+      inputs:
+        command: build
+        repository: demo-ms-base
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/Dockerfile.base
+        buildContext: $(buildContextBasePath)
+        tags: |
+          $(tag)
+
+
+    
+    - task: Docker@2
+      displayName: Build BlazorServer
+      inputs:
+        command: build
+        repository: demo-ms/blazorserver
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/apps/blazor/src/PasswordlessAuthentication.Blazor.Server/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build BlazorWebApp
+      inputs:
+        command: build
+        repository: demo-ms/blazorwebapp
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/apps/blazor/src/PasswordlessAuthentication.Blazor.WebApp/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+
+    - task: Docker@2
+      displayName: Build PublicWeb
+      inputs:
+        command: build
+        repository: demo-ms/publicweb
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/apps/public-web/src/PasswordlessAuthentication.PublicWeb/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Web
+      inputs:
+        command: build
+        repository: demo-ms/web
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/apps/web/src/PasswordlessAuthentication.Web/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build WebGateway
+      inputs:
+        command: build
+        repository: demo-ms/webgateway
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/gateways/web/src/PasswordlessAuthentication.WebGateway/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+    
+    - task: Docker@2
+      displayName: Build PublicWebGateway
+      inputs:
+        command: build
+        repository: demo-ms/publicwebgateway
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/gateways/web-public/src/PasswordlessAuthentication.PublicWebGateway/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Administration
+      inputs:
+        command: build
+        repository: demo-ms/administration
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/services/administration/src/PasswordlessAuthentication.AdministrationService.HttpApi.Host/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Identity
+      inputs:
+        command: build
+        repository: demo-ms/identity
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/services/identity/src/PasswordlessAuthentication.IdentityService.HttpApi.Host/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Product
+      inputs:
+        command: build
+        repository: demo-ms/product
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/services/product/src/PasswordlessAuthentication.ProductService.HttpApi.Host/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Saas
+      inputs:
+        command: build
+        repository: demo-ms/saas
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/services/saas/src/PasswordlessAuthentication.SaasService.HttpApi.Host/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Migrator
+      inputs:
+        command: build
+        repository: demo-ms/migrator
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/shared/PasswordlessAuthentication.DbMigrator/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Blazor
+      inputs:
+        command: build
+        repository: demo-ms/blazor
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/apps/blazor/src/PasswordlessAuthentication.Blazor/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Build Authserver
+      inputs:
+        command: build
+        repository: demo-ms/authserver
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/apps/auth-server/src/PasswordlessAuthentication.AuthServer/Dockerfile.azure
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)          
+
+    - task: Docker@2
+      displayName: Build Angular
+      inputs:
+        command: build
+        repository: demo-ms/angular
+        dockerfile: $(buildContextBasePath)/volo/abp/templates/ms/apps/angular/Dockerfile
+        buildContext: $(buildContextBasePath)
+        arguments: "--build-arg=BASE_IMAGE=demo-ms-base:$(tag)"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+      continueOnError: true
+
+
+
+
+    # PUSH
+    
+
+    - task: Docker@2
+      displayName: Push BlazorServer
+      inputs:
+        command: push
+        repository: demo-ms/blazorserver
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push BlazorWebApp
+      inputs:
+        command: push
+        repository: demo-ms/blazorwebapp
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push PublicWeb
+      inputs:
+        command: push
+        repository: demo-ms/publicweb
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+    
+    - task: Docker@2
+      displayName: Push Web
+      inputs:
+        command: push
+        repository: demo-ms/web
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+    
+    - task: Docker@2
+      displayName: Push WebGateway
+      inputs:
+        command: push
+        repository: demo-ms/webgateway
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push PublicWebGateway
+      inputs:
+        command: push
+        repository: demo-ms/publicwebgateway
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Administration
+      inputs:
+        command: push
+        repository: demo-ms/administration
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Identity
+      inputs:
+        command: push
+        repository: demo-ms/identity
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Product
+      inputs:
+        command: push
+        repository: demo-ms/product
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Saas
+      inputs:
+        command: push
+        repository: demo-ms/saas
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Migrator
+      inputs:
+        command: push
+        repository: demo-ms/migrator
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Authserver
+      inputs:
+        command: push
+        repository: demo-ms/authserver
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Blazor
+      inputs:
+        command: push
+        repository: demo-ms/blazor
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push Angular
+      inputs:
+        command: push
+        repository: demo-ms/angular
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+      continueOnError: true
+    
+
+
+    - bash: |
+        sed -i "s/tag: .*/tag: \"$(tag)\"/" volo/abp/templates/ms/etc/k8s/PasswordlessAuthentication/values-azure.yaml
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(buildContextBasePath)/volo/abp/templates/ms/etc/k8s/PasswordlessAuthentication'
+        artifact: helm
+        publishLocation: pipeline

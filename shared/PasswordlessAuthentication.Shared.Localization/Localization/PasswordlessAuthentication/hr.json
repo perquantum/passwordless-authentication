@@ -1,0 +1,10 @@
+{
+  "culture": "hr",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Dom",
+    "Login": "Prijaviti se",
+    "Menu:Dashboard": "Nadzorna ploča",
+    "Welcome": "Dobrodošli"
+  }
+}

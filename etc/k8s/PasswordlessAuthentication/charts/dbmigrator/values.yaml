@@ -1,0 +1,36 @@
+config:
+  connectionStrings:
+    identityService: #
+    administrationService: #
+    saasService: #
+    productService: #
+  dotnetEnv: Staging
+  redisHost: #
+  elasticsearchUrl: #
+  AbpLicenseCode: #
+
+# Seeded applications and resources 
+openIdDict:
+  applications:
+    authServerRootUrl: #
+    angularRootUrl: #
+    webRootUrl: #
+    blazorRootUrl: #
+    blazorServerRootUrl: #
+    blazorWebAppRootUrl: #
+    publicWebRootUrl: #
+    webGatewayRootUrl: #
+    publicWebGatewayRootUrl: #
+  resources:  
+    accountServiceRootUrl: #
+    administrationServiceRootUrl: #
+    identityServiceRootUrl: #
+    saasServiceRootUrl: #
+    productServiceRootUrl: #
+
+image:
+  repository: mycompanyname/passwordlessauthentication-db-migrator
+  tag: latest
+  pullPolicy: IfNotPresent
+  
+env: {}  

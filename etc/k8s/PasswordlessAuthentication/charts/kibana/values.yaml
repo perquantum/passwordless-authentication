@@ -1,0 +1,6 @@
+config:
+  elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch:9200
+
+ingress:
+  host: kibana-passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls

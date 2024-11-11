@@ -1,0 +1,8 @@
+using PasswordlessAuthentication.ProductService.Products;
+
+namespace PasswordlessAuthentication.ProductService.EntityFrameworkCore.Applications;
+
+public class EfCoreProductAppServiceTests : ProductAppService_Tests<ProductServiceEntityFrameworkCoreTestModule>
+{
+
+}

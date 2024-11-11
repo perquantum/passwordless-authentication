@@ -1,0 +1,10 @@
+{
+  "culture": "de-DE",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Heim",
+    "Login": "Anmeldung",
+    "Menu:Dashboard": "Armaturenbrett",
+    "Welcome": "Willkommen"
+  }
+}

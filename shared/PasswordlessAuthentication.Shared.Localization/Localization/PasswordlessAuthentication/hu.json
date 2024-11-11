@@ -1,0 +1,10 @@
+{
+  "culture": "hu",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Kezdőlap",
+    "Login": "Belépés",
+    "Menu:Dashboard": "Irányítópult",
+    "Welcome": "Üdvözöljük"
+  }
+}

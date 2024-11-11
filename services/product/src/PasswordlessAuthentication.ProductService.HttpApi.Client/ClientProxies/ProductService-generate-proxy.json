@@ -1,0 +1,327 @@
+{
+  "modules": {
+    "productService": {
+      "rootPath": "productService",
+      "remoteServiceName": "ProductService",
+      "controllers": {
+        "PasswordlessAuthentication.ProductService.Products.ProductController": {
+          "controllerName": "Product",
+          "controllerGroupName": "Product",
+          "type": "PasswordlessAuthentication.ProductService.Products.ProductController",
+          "interfaces": [
+            {
+              "type": "PasswordlessAuthentication.ProductService.Products.IProductAppService"
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/product-service/products",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "PasswordlessAuthentication.ProductService.Products.GetProductsInput, PasswordlessAuthentication.ProductService.Application.Contracts",
+                  "type": "PasswordlessAuthentication.ProductService.Products.GetProductsInput",
+                  "typeSimple": "PasswordlessAuthentication.ProductService.Products.GetProductsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FilterText",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Name",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PriceMin",
+                  "jsonName": null,
+                  "type": "System.Single?",
+                  "typeSimple": "number?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PriceMax",
+                  "jsonName": null,
+                  "type": "System.Single?",
+                  "typeSimple": "number?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<PasswordlessAuthentication.ProductService.Products.ProductDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<PasswordlessAuthentication.ProductService.Products.ProductDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<PasswordlessAuthentication.ProductService.Products.ProductDto,PasswordlessAuthentication.ProductService.Products.ProductDto,System.Guid,PasswordlessAuthentication.ProductService.Products.GetProductsInput>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/product-service/products/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PasswordlessAuthentication.ProductService.Products.ProductDto",
+                "typeSimple": "PasswordlessAuthentication.ProductService.Products.ProductDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<PasswordlessAuthentication.ProductService.Products.ProductDto,PasswordlessAuthentication.ProductService.Products.ProductDto,System.Guid,PasswordlessAuthentication.ProductService.Products.GetProductsInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/product-service/products",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "PasswordlessAuthentication.ProductService.Products.ProductCreateDto, PasswordlessAuthentication.ProductService.Application.Contracts",
+                  "type": "PasswordlessAuthentication.ProductService.Products.ProductCreateDto",
+                  "typeSimple": "PasswordlessAuthentication.ProductService.Products.ProductCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "PasswordlessAuthentication.ProductService.Products.ProductCreateDto",
+                  "typeSimple": "PasswordlessAuthentication.ProductService.Products.ProductCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PasswordlessAuthentication.ProductService.Products.ProductDto",
+                "typeSimple": "PasswordlessAuthentication.ProductService.Products.ProductDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<PasswordlessAuthentication.ProductService.Products.ProductDto,PasswordlessAuthentication.ProductService.Products.ProductCreateDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/product-service/products/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "PasswordlessAuthentication.ProductService.Products.ProductUpdateDto, PasswordlessAuthentication.ProductService.Application.Contracts",
+                  "type": "PasswordlessAuthentication.ProductService.Products.ProductUpdateDto",
+                  "typeSimple": "PasswordlessAuthentication.ProductService.Products.ProductUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "PasswordlessAuthentication.ProductService.Products.ProductUpdateDto",
+                  "typeSimple": "PasswordlessAuthentication.ProductService.Products.ProductUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PasswordlessAuthentication.ProductService.Products.ProductDto",
+                "typeSimple": "PasswordlessAuthentication.ProductService.Products.ProductDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<PasswordlessAuthentication.ProductService.Products.ProductDto,System.Guid,PasswordlessAuthentication.ProductService.Products.ProductUpdateDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/product-service/products/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            }
+          }
+        },
+        "PasswordlessAuthentication.ProductService.Products.ProductPublicController": {
+          "controllerName": "ProductPublic",
+          "controllerGroupName": "ProductPublic",
+          "type": "PasswordlessAuthentication.ProductService.Products.ProductPublicController",
+          "interfaces": [
+            {
+              "type": "PasswordlessAuthentication.ProductService.Products.IProductPublicAppService"
+            }
+          ],
+          "actions": {
+            "GetListAsync": {
+              "uniqueName": "GetListAsync",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/product-service/public/products",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<PasswordlessAuthentication.ProductService.Products.ProductDto>",
+                "typeSimple": "[PasswordlessAuthentication.ProductService.Products.ProductDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "PasswordlessAuthentication.ProductService.Products.IProductPublicAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

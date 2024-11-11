@@ -1,0 +1,25 @@
+config:
+  selfUrl: # https://blazor-webapp.passwordlessauthentication.dev
+  gatewayUrl: # http://passwordlessauthentication-st-gateway-web
+  authServer:
+    authority: # http://passwordlessauthentication-st-authserver
+    requireHttpsMetadata: # "false"
+    isOnK8s: # "true"
+    metaAddress: # http://passwordlessauthentication-st-authserver
+  dotnetEnv: # 
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchUrl: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  AbpLicenseCode: #
+
+ingress:
+  host: # blazor-webapp.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-app-blazor-webapp
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}   

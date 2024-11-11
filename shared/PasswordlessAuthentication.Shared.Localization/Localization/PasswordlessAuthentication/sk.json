@@ -1,0 +1,10 @@
+{
+  "culture": "sk",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Domov",
+    "Login": "Prihlásenie",
+    "Menu:Dashboard": "Dashboard",
+    "Welcome": "Vitajte"
+  }
+}

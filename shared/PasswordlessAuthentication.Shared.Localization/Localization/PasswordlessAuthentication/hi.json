@@ -1,0 +1,10 @@
+{
+  "culture": "hi",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "घर",
+    "Login": "लॉग इन करें",
+    "Menu:Dashboard": "डैशबोर्ड",
+    "Welcome": "स्वागत है"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "culture": "hi",
+  "texts": {
+    "Menu:ProductService": "उत्पाद प्रबंधन",
+    "Menu:Products": "उत्पादों",
+    "Permission:ProductService": "उत्पाद सेवा",
+    "Permission:Products": "उत्पादों",
+    "Permission:Create": "सृजन करना",
+    "Permission:Edit": "संपादित करें",
+    "Permission:Delete": "हटाएं",
+    "Products": "उत्पादों",
+    "NewProduct": "नए उत्पाद",
+    "Actions": "कार्रवाई",
+    "SuccessfullyDeleted": "सफलतापूर्वक हटा दिया गया",
+    "DeleteConfirmationMessage": "क्या आप वाकई इस उत्पाद को हटाना चाहते हैं?",
+    "Search": "खोज",
+    "Pick": "चुनना",
+    "SeeAdvancedFilters": "उन्नत फ़िल्टर",
+    "Name": "नाम",
+    "Price": "कीमत",
+    "MinPrice": "न्यूनतम मूल्य",
+    "MaxPrice": "अधिकतम मूल्य",
+    "Product": "उत्पाद",
+    "AreYouSure": "क्या आपको यकीन है?",
+    "MinName": "न्यूनतम नाम",
+    "MaxName": "अधिकतम नाम"
+  }
+}

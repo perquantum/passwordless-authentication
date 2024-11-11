@@ -1,0 +1,8 @@
+using PasswordlessAuthentication.IdentityService.Samples;
+
+namespace PasswordlessAuthentication.IdentityService.EntityFrameworkCore.Applications;
+
+public class EfCoreSampleAppServiceTests : SampleAppService_Tests<IdentityServiceEntityFrameworkCoreTestModule>
+{
+
+}

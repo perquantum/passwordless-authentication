@@ -1,0 +1,93 @@
+
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    endpoint: github.com_skoc10
+    ref: skoc/demo-ms
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    name: aks-deployer-agent
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+
+  - task: HelmDeploy@0
+    displayName: elasticsearch
+    inputs:
+      connectionType: 'Azure Resource Manager'
+      azureSubscription: 'Microsoft Azure Sponsorluk(a9297c4e-bba1-4581-a765-9b7623f42a8c)'
+      azureResourceGroup: 'volo-rg'
+      kubernetesCluster: 'aks-abp-io'
+      useClusterAdmin: true
+      namespace: 'demo-ms'
+      command: 'upgrade'
+      chartType: 'FilePath'
+      chartPath: 'abp/templates/ms/etc/k8s/PasswordlessAuthentication/charts/elasticsearch'
+      chartVersion: '1.0.0'
+      releaseName: 'elasticsearch'
+
+  - task: HelmDeploy@0
+    displayName: kibana
+    inputs:
+      connectionType: 'Azure Resource Manager'
+      azureSubscription: 'Microsoft Azure Sponsorluk(a9297c4e-bba1-4581-a765-9b7623f42a8c)'
+      azureResourceGroup: volo-rg
+      kubernetesCluster: aks-abp-io
+      useClusterAdmin: true
+      namespace: demo-ms
+      command: upgrade
+      chartType: FilePath
+      chartPath: abp/templates/ms/etc/k8s/PasswordlessAuthentication/charts/kibana
+      version: 1.0.0
+      releaseName: kibana
+
+  - task: HelmDeploy@0
+    displayName: rabbitmq
+    inputs:
+      connectionType: 'Azure Resource Manager'
+      azureSubscription: 'Microsoft Azure Sponsorluk(a9297c4e-bba1-4581-a765-9b7623f42a8c)'
+      azureResourceGroup: volo-rg
+      kubernetesCluster: aks-abp-io
+      useClusterAdmin: true
+      namespace: demo-ms
+      command: upgrade
+      chartType: FilePath
+      chartPath: abp/templates/ms/etc/k8s/PasswordlessAuthentication/charts/rabbitmq
+      version: 1.0.0
+      releaseName: rabbitmq
+
+  - task: HelmDeploy@0
+    displayName: redis
+    inputs:
+      connectionType: 'Azure Resource Manager'
+      azureSubscription: 'Microsoft Azure Sponsorluk(a9297c4e-bba1-4581-a765-9b7623f42a8c)'
+      azureResourceGroup: volo-rg
+      kubernetesCluster: aks-abp-io
+      useClusterAdmin: true
+      namespace: demo-ms
+      command: upgrade
+      chartType: FilePath
+      chartPath: abp/templates/ms/etc/k8s/PasswordlessAuthentication/charts/redis
+      version: 1.0.0
+      releaseName: redis
+
+  - task: HelmDeploy@0
+    displayName: sqlserver
+    inputs:
+      connectionType: 'Azure Resource Manager'
+      azureSubscription: 'Microsoft Azure Sponsorluk(a9297c4e-bba1-4581-a765-9b7623f42a8c)'
+      azureResourceGroup: volo-rg
+      kubernetesCluster: aks-abp-io
+      useClusterAdmin: true
+      namespace: demo-ms
+      command: upgrade
+      chartType: FilePath
+      chartPath: abp/templates/ms/etc/k8s/PasswordlessAuthentication/charts/sqlserver
+      version: 1.0.0
+      releaseName: sqlserver
+...

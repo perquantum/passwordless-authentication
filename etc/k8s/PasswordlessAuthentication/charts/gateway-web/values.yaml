@@ -1,0 +1,36 @@
+config:
+  selfUrl: # https://gateway-web.passwordlessauthentication.dev
+  corsOrigins: # https://passwordlessauthentication-st-angular
+  globalConfigurationBaseUrl: # http://passwordlessauthentication-st-gateway-web
+  authServer:
+    authority: # http://passwordlessauthentication-st-authserver
+    requireHttpsMetadata: # "false"
+    metadataAddress: # https://authserver.passwordlessauthentication.dev/.well-known/openid-configuration
+    swaggerClientId: # WebGateway_Swagger
+  dotnetEnv: # 
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchUrl: #
+  AbpLicenseCode: #
+  
+reRoutes:
+  accountService:
+    url: http://passwordlessauthentication-st-authserver
+  saasService:
+    url: http://saas-st-administration
+  administrationService:
+    url: http://passwordlessauthentication-st-administration
+  identityService:
+    url: http://passwordlessauthentication-st-identity
+  productService:
+    url: http://passwordlessauthentication-st-product
+ingress:
+  host: # gateway-web.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-gateway-web
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

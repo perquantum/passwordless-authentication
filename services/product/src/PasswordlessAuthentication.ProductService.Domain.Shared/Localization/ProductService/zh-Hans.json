@@ -1,0 +1,28 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "Menu:ProductService": "产品服务",
+    "Menu:Products": "产品",
+    "Permission:ProductService": "产品服务",
+    "Permission:Products": "产品",
+    "Permission:Create": "创建",
+    "Permission:Edit": "编辑",
+    "Permission:Delete": "删除",
+    "Products": "产品",
+    "NewProduct": "新产品",
+    "Actions": "操作",
+    "SuccessfullyDeleted": "成功删除",
+    "DeleteConfirmationMessage": "您确定要删除此产品吗？",
+    "Search": "搜索",
+    "Pick": "挑选",
+    "SeeAdvancedFilters": "高级过滤器",
+    "Name": "名称",
+    "Price": "价格",
+    "MinPrice": "最低价格",
+    "MaxPrice": "最高价格",
+    "Product": "产品",
+    "AreYouSure": "你确定吗？",
+    "MinName": "最小名称",
+    "MaxName": "最大名称"
+  }
+}

@@ -1,0 +1,66 @@
+name: PasswordlessAuthentication
+services:
+- name: auth-server
+  project: apps/auth-server/src/PasswordlessAuthentication.AuthServer/PasswordlessAuthentication.AuthServer.csproj
+  bindings:
+    - protocol: https
+      port: 44322
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca
+- name: administration-service
+  project: services/administration/src/PasswordlessAuthentication.AdministrationService.HttpApi.Host/PasswordlessAuthentication.AdministrationService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 44367
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca
+- name: identity-service
+  project: services/identity/src/PasswordlessAuthentication.IdentityService.HttpApi.Host/PasswordlessAuthentication.IdentityService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 44388
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca
+- name: saas-service
+  project: services/saas/src/PasswordlessAuthentication.SaasService.HttpApi.Host/PasswordlessAuthentication.SaasService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 44381
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca
+- name: product-service
+  project: services/product/src/PasswordlessAuthentication.ProductService.HttpApi.Host/PasswordlessAuthentication.ProductService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 44361
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca
+- name: web-gateway
+  project: gateways/web/src/PasswordlessAuthentication.WebGateway/PasswordlessAuthentication.WebGateway.csproj
+  bindings:
+    - protocol: https
+      port: 44325
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca  
+- name: web-public-gateway
+  project: gateways/web-public/src/PasswordlessAuthentication.PublicWebGateway/PasswordlessAuthentication.PublicWebGateway.csproj
+  bindings:
+    - protocol: https
+      port: 44353
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca
+- name: web
+  project: apps/web/src/PasswordlessAuthentication.Web/PasswordlessAuthentication.Web.csproj
+  bindings:
+    - protocol: https
+      port: 44321
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=24718aad-53c6-4138-aa23-abec6aa655ca

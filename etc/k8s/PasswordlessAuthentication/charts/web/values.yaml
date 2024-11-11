@@ -1,0 +1,25 @@
+config:
+  selfUrl: # https://web.passwordlessauthentication.dev
+  gatewayUrl: # http://passwordlessauthentication-st-gateway-web
+  authServer:
+    authority: # https://authserver.passwordlessauthentication.dev
+    requireHttpsMetadata: # "false"
+    isOnK8s: # "true"
+    metaAddress: # http://passwordlessauthentication-st-authserver
+  dotnetEnv: # 
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchUrl: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  AbpLicenseCode: #
+
+ingress:
+  host: # web.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-app-web
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

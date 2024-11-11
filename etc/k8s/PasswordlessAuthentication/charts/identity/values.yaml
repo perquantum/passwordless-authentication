@@ -1,0 +1,47 @@
+config:
+  selfUrl: # https://identity.passwordlessauthentication.dev
+  corsOrigins: # https://passwordlessauthentication-st-gateway-web,https://passwordlessauthentication-st-gateway-public-web
+  connectionStrings:
+    identityService: #
+    administrationService: #
+    saasService: #
+  authServer:
+    authority: # http://passwordlessauthentication-st-authserver
+    requireHttpsMetadata: # "false"
+    metadataAddress: # https://authserver.passwordlessauthentication.dev/.well-known/openid-configuration
+    swaggerClientId: WebGateway_Swagger
+  dotnetEnv: Staging
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchUrl: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  AbpLicenseCode: #
+
+# Seeded applications and resources 
+openIdDict:
+  applications:
+    authServerRootUrl: #
+    angularRootUrl: #
+    webRootUrl: #
+    blazorRootUrl: #
+    blazorServerRootUrl: #
+    publicWebRootUrl: #
+    webGatewayRootUrl: #
+    publicWebGatewayRootUrl: #
+  resources:  
+    accountServiceRootUrl: #
+    administrationServiceRootUrl: #
+    identityServiceRootUrl: #
+    saasServiceRootUrl: #
+    productServiceRootUrl: #
+
+ingress:
+  host: identity.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-service-identity
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

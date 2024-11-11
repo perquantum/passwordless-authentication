@@ -1,0 +1,14 @@
+ARG BASE_IMAGE=base
+
+FROM ${BASE_IMAGE} AS base
+WORKDIR /app
+WORKDIR /app/volo/abp/templates/ms/services/product/src/PasswordlessAuthentication.ProductService.HttpApi.Host
+RUN dotnet publish -c Release -o bin/Release/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS publish
+
+WORKDIR /app
+EXPOSE 80
+ENV ASPNETCORE_URLS=http://+:80
+COPY --from=base /app/volo/abp/templates/ms/services/product/src/PasswordlessAuthentication.ProductService.HttpApi.Host/bin/Release/publish .
+ENTRYPOINT ["dotnet", "PasswordlessAuthentication.ProductService.HttpApi.Host.dll"]

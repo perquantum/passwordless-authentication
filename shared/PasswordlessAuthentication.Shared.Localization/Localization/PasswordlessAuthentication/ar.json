@@ -1,0 +1,10 @@
+{
+  "culture": "ar",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "منزل، بيت",
+    "Login": "تسجيل الدخول",
+    "Menu:Dashboard": "لوحة القيادة",
+    "Welcome": "مرحبا"
+  }
+}

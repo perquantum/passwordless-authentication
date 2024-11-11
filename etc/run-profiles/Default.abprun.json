@@ -1,0 +1,58 @@
+{
+  "applications": {
+    "Docker-Dependencies": {
+      "type": "cli",
+      "workingDirectory": "../docker",
+      "startCommand": "./up.ps1",
+      "stopCommand": "./down.ps1"
+    },
+    "PasswordlessAuthentication.AuthServer": {
+      "type": "dotnet-project",
+      "path": "../../apps/auth-server/src/PasswordlessAuthentication.AuthServer/PasswordlessAuthentication.AuthServer.csproj"
+    },
+    "PasswordlessAuthentication.Blazor": {
+      "type": "dotnet-project",
+      "path": "../../apps/blazor/src/PasswordlessAuthentication.Blazor/PasswordlessAuthentication.Blazor.csproj"
+    },
+    "PasswordlessAuthentication.Blazor.Server": {
+      "type": "dotnet-project",
+      "path": "../../apps/blazor/src/PasswordlessAuthentication.Blazor.Server/PasswordlessAuthentication.Blazor.Server.csproj"
+    },
+    "PasswordlessAuthentication.Blazor.WebApp": {
+      "type": "dotnet-project",
+      "path": "../../apps/blazor/src/PasswordlessAuthentication.Blazor.WebApp/PasswordlessAuthentication.Blazor.WebApp.csproj"
+    },
+    "PasswordlessAuthentication.PublicWeb": {
+      "type": "dotnet-project",
+      "path": "../../apps/public-web/src/PasswordlessAuthentication.PublicWeb/PasswordlessAuthentication.PublicWeb.csproj"
+    },
+    "PasswordlessAuthentication.Web": {
+      "type": "dotnet-project",
+      "path": "../../apps/web/src/PasswordlessAuthentication.Web/PasswordlessAuthentication.Web.csproj"
+    },
+    "PasswordlessAuthentication.AdministrationService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/administration/src/PasswordlessAuthentication.AdministrationService.HttpApi.Host/PasswordlessAuthentication.AdministrationService.HttpApi.Host.csproj"
+    },
+    "PasswordlessAuthentication.IdentityService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/identity/src/PasswordlessAuthentication.IdentityService.HttpApi.Host/PasswordlessAuthentication.IdentityService.HttpApi.Host.csproj"
+    },
+    "PasswordlessAuthentication.ProductService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/product/src/PasswordlessAuthentication.ProductService.HttpApi.Host/PasswordlessAuthentication.ProductService.HttpApi.Host.csproj"
+    },
+    "PasswordlessAuthentication.SaasService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/saas/src/PasswordlessAuthentication.SaasService.HttpApi.Host/PasswordlessAuthentication.SaasService.HttpApi.Host.csproj"
+    },
+    "PasswordlessAuthentication.WebGateway": {
+      "type": "dotnet-project",
+      "path": "../../gateways/web/src/PasswordlessAuthentication.WebGateway/PasswordlessAuthentication.WebGateway.csproj"
+    },
+    "PasswordlessAuthentication.PublicWebGateway": {
+      "type": "dotnet-project",
+      "path": "../../gateways/web-public/src/PasswordlessAuthentication.PublicWebGateway/PasswordlessAuthentication.PublicWebGateway.csproj"
+    }
+  }
+}

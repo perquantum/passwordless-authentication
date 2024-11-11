@@ -1,0 +1,21 @@
+config:
+  selfUrl: # https://angular.passwordlessauthentication.dev
+  gatewayUrl: # https://gateway-web.passwordlessauthentication.dev
+  authServer:
+      authority: # https://authserver.passwordlessauthentication.dev
+      requireHttpsMetadata: # false
+      responseType: "code"
+      strictDiscoveryDocumentValidation: false
+      skipIssuerCheck: true
+  AbpLicenseCode: #
+
+ingress:
+  host: # angular.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-app-angular
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

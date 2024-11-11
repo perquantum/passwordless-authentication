@@ -1,0 +1,28 @@
+{
+  "culture": "hr",
+  "texts": {
+    "Menu:ProductService": "Usluga proizvoda",
+    "Menu:Products": "Proizvodi",
+    "Permission:ProductService": "Usluga proizvoda",
+    "Permission:Products": "Proizvodi",
+    "Permission:Create": "Stvoriti",
+    "Permission:Edit": "Uredi",
+    "Permission:Delete": "Izbrisati",
+    "Products": "Proizvodi",
+    "NewProduct": "Novi proizvod",
+    "Actions": "Radnje",
+    "SuccessfullyDeleted": "Uspješno izbrisano",
+    "DeleteConfirmationMessage": "Jeste li sigurni da želite izbrisati ovaj proizvod?",
+    "Search": "traži",
+    "Pick": "Odabrati",
+    "SeeAdvancedFilters": "Napredni filteri",
+    "Name": "Ime",
+    "Price": "Cijena",
+    "MinPrice": "Minimalna cijena",
+    "MaxPrice": "Maksimalna cijena",
+    "Product": "Proizvod",
+    "AreYouSure": "Jesi li siguran?",
+    "MinName": "Min. ime",
+    "MaxName": "Max Ime"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "culture": "it",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Home",
+    "Login": "Login",
+    "Menu:Dashboard": "Pannello di controllo",
+    "Welcome": "Benvenuto"
+  }
+}

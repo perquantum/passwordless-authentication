@@ -1,0 +1,10 @@
+{
+  "culture": "ru",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Дома",
+    "Login": "Авторизоваться",
+    "Menu:Dashboard": "Панель приборов",
+    "Welcome": "Добро пожаловать"
+  }
+}

@@ -1,0 +1,31 @@
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS builder
+WORKDIR /src
+
+COPY "PasswordlessAuthentication.sln" "PasswordlessAuthentication.sln"
+
+# Applications
+COPY "apps/auth-server/src/PasswordlessAuthentication.AuthServer/PasswordlessAuthentication.AuthServer.csproj" "apps/auth-server/src/PasswordlessAuthentication.AuthServer/PasswordlessAuthentication.AuthServer.csproj"
+COPY "apps/public-web/src/PasswordlessAuthentication.PublicWeb/PasswordlessAuthentication.PublicWeb.csproj" "apps/public-web/src/PasswordlessAuthentication.PublicWeb/PasswordlessAuthentication.PublicWeb.csproj"
+COPY "apps/web/src/PasswordlessAuthentication.Web/PasswordlessAuthentication.Web.csproj" "apps/web/src/PasswordlessAuthentication.Web/PasswordlessAuthentication.Web.csproj"
+# Shared Projects
+COPY "shared/PasswordlessAuthentication.DbMigrator/PasswordlessAuthentication.DbMigrator.csproj" "shared/PasswordlessAuthentication.DbMigrator/PasswordlessAuthentication.DbMigrator.csproj"
+COPY "shared/PasswordlessAuthentication.Shared.Hosting/PasswordlessAuthentication.Shared.Hosting.csproj" "shared/PasswordlessAuthentication.Shared.Hosting/PasswordlessAuthentication.Shared.Hosting.csproj"
+COPY "shared/PasswordlessAuthentication.Shared.Hosting.Gateways/PasswordlessAuthentication.Shared.Hosting.Gateways.csproj" "shared/PasswordlessAuthentication.Shared.Hosting.Gateways/PasswordlessAuthentication.Shared.Hosting.Gateways.csproj"
+COPY "shared/PasswordlessAuthentication.Shared.Hosting.Microservices/PasswordlessAuthentication.Shared.Hosting.Microservices.csproj" "shared/PasswordlessAuthentication.Shared.Hosting.Microservices/PasswordlessAuthentication.Shared.Hosting.Microservices.csproj"
+COPY "shared/PasswordlessAuthentication.Shared.Hosting.AspNetCore/PasswordlessAuthentication.Shared.Hosting.AspNetCore.csproj" "shared/PasswordlessAuthentication.Shared.Hosting.AspNetCore/PasswordlessAuthentication.Shared.Hosting.AspNetCore.csproj"
+COPY "shared/PasswordlessAuthentication.Shared.Hosting/PasswordlessAuthentication.Shared.Hosting.csproj" "shared/PasswordlessAuthentication.Shared.Hosting/PasswordlessAuthentication.Shared.Hosting.csproj"
+COPY "shared/PasswordlessAuthentication.Shared.Localization/PasswordlessAuthentication.Shared.Localization.csproj" "shared/PasswordlessAuthentication.Shared.Localization/PasswordlessAuthentication.Shared.Localization.csproj"
+
+# Microservices
+COPY "services/administration/src/PasswordlessAuthentication.AdministrationService.HttpApi.Host/PasswordlessAuthentication.AdministrationService.HttpApi.Host.csproj" "services/administration/src/PasswordlessAuthentication.AdministrationService.HttpApi.Host/PasswordlessAuthentication.AdministrationService.HttpApi.Host.csproj"
+COPY "services/identity/src/PasswordlessAuthentication.IdentityService.HttpApi.Host/PasswordlessAuthentication.IdentityService.HttpApi.Host.csproj" "services/identity/src/PasswordlessAuthentication.IdentityService.HttpApi.Host/PasswordlessAuthentication.IdentityService.HttpApi.Host.csproj"
+COPY "services/saas/src/PasswordlessAuthentication.SaasService.HttpApi.Host/PasswordlessAuthentication.SaasService.HttpApi.Host.csproj" "services/saas/src/PasswordlessAuthentication.SaasService.HttpApi.Host/PasswordlessAuthentication.SaasService.HttpApi.Host.csproj"
+COPY "services/product/src/PasswordlessAuthentication.ProductService.HttpApi.Host/PasswordlessAuthentication.ProductService.HttpApi.Host.csproj" "services/product/src/PasswordlessAuthentication.ProductService.HttpApi.Host/PasswordlessAuthentication.ProductService.HttpApi.Host.csproj"
+# Gateways
+COPY "gateways/web/src/PasswordlessAuthentication.WebGateway/PasswordlessAuthentication.WebGateway.csproj" "gateways/web/src/PasswordlessAuthentication.WebGateway/PasswordlessAuthentication.WebGateway.csproj"
+COPY "gateways/web-public/src/PasswordlessAuthentication.PublicWebGateway/PasswordlessAuthentication.PublicWebGateway.csproj" "gateways/web-public/src/PasswordlessAuthentication.PublicWebGateway/PasswordlessAuthentication.PublicWebGateway.csproj"
+
+COPY "NuGet.Config" "NuGet.Config"
+
+RUN dotnet restore "PasswordlessAuthentication.sln"

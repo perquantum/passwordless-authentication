@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "name": "PasswordlessAuthenticationWeb",
+  "private": true,
+  "dependencies": {
+    "@volo/abp.aspnetcore.mvc.ui.theme.leptonx": "~3.3.3",
+    "@volo/identity": "~8.3.3",
+    "@abp/chart.js": "~8.3.3",
+    "@volo/language-management": "~8.3.3"
+  }
+}

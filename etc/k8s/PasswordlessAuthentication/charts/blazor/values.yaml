@@ -1,0 +1,18 @@
+config:
+  selfUrl: # https://blazor.passwordlessauthentication.dev
+  gatewayUrl: # https://gateway-web.passwordlessauthentication.dev
+  authServer:
+      authority: # https://passwordlessauthentication-st-authserver
+      responseType: "code"
+  AbpLicenseCode: #
+
+ingress:
+  host: # blazor.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-app-blazor
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

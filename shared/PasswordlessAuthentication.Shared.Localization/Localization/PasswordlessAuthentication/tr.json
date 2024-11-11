@@ -1,0 +1,10 @@
+{
+  "culture": "tr",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Ana Sayfa",
+    "Login": "Giriş",
+    "Menu:Dashboard": "Genel görünüm",
+    "Welcome": "Hoşgeldiniz"
+  }
+}

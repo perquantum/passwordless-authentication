@@ -1,0 +1,29 @@
+config:
+  selfUrl: # https://product.passwordlessauthentication.dev
+  corsOrigins: #
+  connectionStrings:
+    productService: #
+    administrationService: #
+    saasService: #
+  authServer:
+    authority: # http://passwordlessauthentication-st-authserver
+    requireHttpsMetadata: # "false"
+    metadataAddress: # https://authserver.passwordlessauthentication.dev/.well-known/openid-configuration
+    swaggerClientId: WebGateway_Swagger
+  dotnetEnv: Staging
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchUrl: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  AbpLicenseCode: #
+
+ingress:
+  host: product.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-service-product
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}      

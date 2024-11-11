@@ -1,0 +1,33 @@
+config:
+  selfUrl: # https://authserver.passwordlessauthentication.dev
+  corsOrigins: #
+  allowedRedirectUrls: #
+  disablePii: #
+  identityService:
+    connString: # 
+  administrationService:
+    connString: # 
+  saasService:
+    connString: #     
+  authServer:
+    authority: #
+    requireHttpsMetadata: #
+    swaggerClientId: #
+  dotnetEnv: # 
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchUrl: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  AbpLicenseCode: #
+
+ingress:
+  host: authserver.passwordlessauthentication.dev
+  tlsSecret: passwordlessauthentication-tls
+
+image:
+  repository: mycompanyname/passwordlessauthentication-app-authserver
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}
+    

@@ -1,0 +1,10 @@
+{
+  "culture": "pt-BR",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Casa",
+    "Login": "Conecte-se",
+    "Menu:Dashboard": "Painel",
+    "Welcome": "Bem-vindo"
+  }
+}

@@ -1,0 +1,372 @@
+# auth-server sub-chart override
+authserver:
+  config:
+    selfUrl: https://authserver.passwordlessauthentication.dev
+    corsOrigins: https://angular.passwordlessauthentication.dev,https://blazor.passwordlessauthentication.dev,https://gateway-web.passwordlessauthentication.dev,https://gateway-public.passwordlessauthentication.dev,https://identity.passwordlessauthentication.dev,https://administration.passwordlessauthentication.dev,https://saas.passwordlessauthentication.dev,https://product.passwordlessauthentication.dev
+    allowedRedirectUrls: https://angular.passwordlessauthentication.dev,http://angular.passwordlessauthentication.dev,https://blazor.passwordlessauthentication.dev,http://blazor.passwordlessauthentication.dev,https://blazor.passwordlessauthentication.dev,https://blazor-server.passwordlessauthentication.dev,https://blazor-webapp.passwordlessauthentication.dev,https://web.passwordlessauthentication.dev
+    disablePii: "false"
+    identityService:
+      connString: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Identity;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+    administrationService:
+      connString: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Administration;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+    saasService:
+      connString: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Saas;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+    authServer:
+      authority: https://authserver.passwordlessauthentication.dev
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+    dotnetEnv: Staging
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  ingress:
+    host: authserver.passwordlessauthentication.dev
+  image:
+    repository: mycompanyname/passwordlessauthentication-app-authserver
+    tag: latest
+
+# identity-service sub-chart override
+identity:
+  config:
+    selfUrl: https://identity.passwordlessauthentication.dev
+    corsOrigins: https://gateway-web.passwordlessauthentication.dev
+    connectionStrings:
+      identityService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Identity;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      administrationService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Administration;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      saasService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Saas;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+    authServer:
+      authority: http://passwordlessauthentication-st-authserver
+      requireHttpsMetadata: "false"
+      metadataAddress: https://authserver.passwordlessauthentication.dev
+      swaggerClientId: WebGateway_Swagger
+    dotnetEnv: Staging
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  openIdDict: #Seed applications and resources
+    applications:
+      authServerRootUrl: https://authserver.passwordlessauthentication.dev
+      angularRootUrl: https://angular.passwordlessauthentication.dev
+      webRootUrl: https://web.passwordlessauthentication.dev
+      blazorRootUrl: https://blazor.passwordlessauthentication.dev
+      blazorServerRootUrl: https://blazor-server.passwordlessauthentication.dev
+      blazorWebAppRootUrl: https://blazor-webapp.passwordlessauthentication.dev
+      publicWebRootUrl: https://passwordlessauthentication.dev
+      webGatewayRootUrl: https://gateway-web.passwordlessauthentication.dev
+      publicWebGatewayRootUrl: https://gateway-public.passwordlessauthentication.dev
+    resources:  
+      accountServiceRootUrl: https://authserver.passwordlessauthentication.dev
+      administrationServiceRootUrl: https://administration.passwordlessauthentication.dev
+      identityServiceRootUrl: https://identity.passwordlessauthentication.dev
+      saasServiceRootUrl: https://saas.passwordlessauthentication.dev
+      productServiceRootUrl: https://product.passwordlessauthentication.dev
+  ingress:
+    host: identity.passwordlessauthentication.dev
+  image:
+    repository: mycompanyname/passwordlessauthentication-service-identity
+    tag: latest
+
+# administration-service sub-chart override
+administration:
+  config:
+    selfUrl: https://administration.passwordlessauthentication.dev
+    corsOrigins: https://gateway-web.passwordlessauthentication.dev,https://gateway-public.passwordlessauthentication.dev
+    connectionStrings:
+      administrationService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Administration;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      saasService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Saas;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"    
+    authServer:
+      authority: http://passwordlessauthentication-st-authserver
+      requireHttpsMetadata: "false"
+      metadataAddress: https://authserver.passwordlessauthentication.dev
+      swaggerClientId: WebGateway_Swagger
+    remoteServices:
+      abpIdentityBaseUrl: http://passwordlessauthentication-st-identity
+      useCurrentToken: "false"   
+    dotnetEnv: Staging
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  synchedCommunication: # Used for server-to-server (client-credentials) communication with identityService for user permissions
+    authority: http://passwordlessauthentication-st-authserver
+    requireHttps: "false"
+    validateIssuerName: "false"
+    validateEndpoints: "false"
+  ingress:
+    host: administration.passwordlessauthentication.dev
+  image:
+    repository: mycompanyname/passwordlessauthentication-service-administration
+    tag: latest
+
+# saas-service sub-chart override
+saas:
+  config:
+    selfUrl: https://saas.passwordlessauthentication.dev
+    corsOrigins: https://gateway-web.passwordlessauthentication.dev
+    connectionStrings:
+      administrationService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Administration;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      saasService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Saas;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+    authServer:
+      authority: http://passwordlessauthentication-st-authserver
+      requireHttpsMetadata: "false"
+      metadataAddress: https://authserver.passwordlessauthentication.dev
+      swaggerClientId: WebGateway_Swagger
+    dotnetEnv: Staging
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  ingress:
+    host: saas.passwordlessauthentication.dev
+  image:
+    repository: mycompanyname/passwordlessauthentication-service-saas
+    tag: latest  
+
+# product-service sub-chart override
+product:
+  config:
+    selfUrl: https://product.passwordlessauthentication.dev
+    corsOrigins: https://gateway-web.passwordlessauthentication.dev,https://gateway-public.passwordlessauthentication.dev
+    connectionStrings:
+      productService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_ProductService;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      administrationService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Administration;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      saasService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Saas;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+    authServer:
+      authority: http://passwordlessauthentication-st-authserver
+      requireHttpsMetadata: "false"
+      metadataAddress: https://authserver.passwordlessauthentication.dev
+      swaggerClientId: WebGateway_Swagger
+    dotnetEnv: Staging
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  ingress:
+    host: product.passwordlessauthentication.dev
+  image:
+    repository: mycompanyname/passwordlessauthentication-service-product
+    tag: latest
+
+# gateway-web sub-chart override
+gateway-web:
+  config:
+    selfUrl: https://gateway-web.passwordlessauthentication.dev
+    corsOrigins: https://angular.passwordlessauthentication.dev,https://blazor.passwordlessauthentication.dev
+    authServer:
+      authority: http://passwordlessauthentication-st-authserver
+      requireHttpsMetadata: "false"
+      metadataAddress: https://authserver.passwordlessauthentication.dev
+      swaggerClientId: WebGateway_Swagger      
+    dotnetEnv: Staging
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  reRoutes:
+    accountService:
+      url: http://passwordlessauthentication-st-authserver
+    saasService:
+      url: http://passwordlessauthentication-st-saas
+    administrationService:
+      url: http://passwordlessauthentication-st-administration
+    identityService:
+      url: http://passwordlessauthentication-st-identity
+    productService:
+      url: http://passwordlessauthentication-st-product
+  ingress:
+    host: gateway-web.passwordlessauthentication.dev
+  image:
+    repository: mycompanyname/passwordlessauthentication-gateway-web
+    tag: latest
+    pullPolicy: IfNotPresent
+
+# gateway-web-public sub-chart override
+gateway-web-public:
+  config:
+    selfUrl: https://gateway-public.passwordlessauthentication.dev
+    authServer:
+      authority: http://passwordlessauthentication-st-authserver
+      requireHttpsMetadata: "false"
+      metadataAddress: https://authserver.passwordlessauthentication.dev
+      swaggerClientId: WebGateway_Swagger      
+    dotnetEnv: Staging 
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  reRoutes:
+    accountService:
+      url: http://passwordlessauthentication-st-authserver
+    saasService:
+      url: http://passwordlessauthentication-st-saas
+    administrationService:
+      url: http://passwordlessauthentication-st-administration
+    productService:
+      url: http://passwordlessauthentication-st-product  
+  ingress:
+    host: gateway-public.passwordlessauthentication.dev
+    tlsSecret: passwordlessauthentication-tls
+  image:
+    repository: mycompanyname/passwordlessauthentication-gateway-web-public
+    tag: latest
+    pullPolicy: IfNotPresent
+
+kibana:
+  config:
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch:9200
+  ingress:
+    host: kibana.passwordlessauthentication.dev
+    tlsSecret: passwordlessauthentication-tls
+
+# dbmigrator sub-chart override
+dbmigrator:
+  config:
+    connectionStrings:
+      identityService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Identity;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      administrationService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Administration;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      saasService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_Saas;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+      productService: "Server=passwordlessauthentication-st-sqldb,1433;Database=PasswordlessAuthentication_ProductService;User Id=sa;password=myPassw@rd;TrustServerCertificate=True"
+    dotnetEnv: Staging
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+    redisHost: passwordlessauthentication-st-redis
+  openIdDict:
+    applications:
+      authServerRootUrl: https://authserver.passwordlessauthentication.dev
+      angularRootUrl: https://angular.passwordlessauthentication.dev
+      webRootUrl: https://web.passwordlessauthentication.dev
+      blazorRootUrl: https://blazor.passwordlessauthentication.dev
+      blazorServerRootUrl: https://blazor-server.passwordlessauthentication.dev
+      blazorWebAppRootUrl: https://blazor-webapp.passwordlessauthentication.dev
+      publicWebRootUrl: https://passwordlessauthentication.dev
+      webGatewayRootUrl: https://gateway-web.passwordlessauthentication.dev
+      publicWebGatewayRootUrl: https://gateway-public.passwordlessauthentication.dev
+    resources:  
+      accountServiceRootUrl: https://authserver.passwordlessauthentication.dev
+      administrationServiceRootUrl: https://administration.passwordlessauthentication.dev
+      identityServiceRootUrl: https://identity.passwordlessauthentication.dev
+      saasServiceRootUrl: https://saas.passwordlessauthentication.dev
+      productServiceRootUrl: https://product.passwordlessauthentication.dev
+  image:
+    repository: mycompanyname/passwordlessauthentication-db-migrator
+    tag: latest
+    pullPolicy: IfNotPresent  
+
+# Public Web application sub-chart override
+publicweb:
+  config:
+    selfUrl: https://passwordlessauthentication.dev
+    gatewayUrl: http://passwordlessauthentication-st-gateway-web-public
+    authServer:
+      authority: https://authserver.passwordlessauthentication.dev # should be domain on production (https://auth.mydomain.com)
+      requireHttpsMetadata: "false"
+      isOnK8s: "true"
+      metaAddress: http://passwordlessauthentication-st-authserver # should be container on production (http://passwordlessauthentication-az-authserver)
+    dotnetEnv: Staging 
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  ingress:
+    host: passwordlessauthentication.dev
+    tlsSecret: passwordlessauthentication-tls
+  image:
+    repository: mycompanyname/passwordlessauthentication-app-public-web
+    tag: latest
+    pullPolicy: IfNotPresent
+# Web(MVC) back-office application sub-chart override
+web:
+  config:
+    selfUrl: https://web.passwordlessauthentication.dev
+    gatewayUrl: http://passwordlessauthentication-st-gateway-web
+    authServer:
+      authority: https://authserver.passwordlessauthentication.dev # should be domain on production (https://auth.mydomain.com)
+      requireHttpsMetadata: "false"
+      isOnK8s: "true"
+      metaAddress: http://passwordlessauthentication-st-authserver # should be container on production (http://passwordlessauthentication-az-authserver)
+    dotnetEnv: Staging 
+    redisHost: passwordlessauthentication-st-redis
+    rabbitmqHost: passwordlessauthentication-st-rabbitmq
+    elasticsearchUrl: http://passwordlessauthentication-st-elasticsearch
+  ingress:
+    host: web.passwordlessauthentication.dev
+    tlsSecret: passwordlessauthentication-tls
+  image:
+    repository: mycompanyname/passwordlessauthentication-app-web
+    tag: latest
+    pullPolicy: IfNotPresent
+# Default values for PasswordlessAuthentication.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

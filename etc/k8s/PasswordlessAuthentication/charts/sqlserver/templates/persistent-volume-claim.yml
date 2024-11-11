@@ -1,0 +1,18 @@
+{{- if .Values.pvc.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+{{- if hasKey .Values.pvc "nameOverride" }}
+  name: {{ .Values.pvc.nameOverride }}
+{{ else }}
+  name: {{ .Values.name }}
+{{- end }}
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: {{ .Values.sc }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc.size }}
+{{- end }}

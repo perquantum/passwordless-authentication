@@ -1,0 +1,11 @@
+{
+  "culture": "en",
+  "texts": {
+    "AppName": "PasswordlessAuthentication",
+    "Menu:Home": "Home",
+    "Login": "Login",
+    "Menu:Dashboard": "Dashboard",
+    "Welcome": "Welcome to PasswordlessAuthentication!",
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information visit abp.io."
+  }
+}
