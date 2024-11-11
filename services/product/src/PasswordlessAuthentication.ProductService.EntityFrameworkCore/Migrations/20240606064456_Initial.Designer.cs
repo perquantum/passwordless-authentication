@@ -25,7 +25,6 @@ namespace PasswordlessAuthentication.ProductService.Migrations
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("PasswordlessAuthentication.ProductService.Products.Product", b =>
                 {

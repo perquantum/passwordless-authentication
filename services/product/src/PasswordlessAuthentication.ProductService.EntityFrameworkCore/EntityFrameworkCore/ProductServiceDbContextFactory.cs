@@ -25,7 +25,7 @@ public class ProductServiceDbContextFactory : IDesignTimeDbContextFactory<Produc
         ProductServiceEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<ProductServiceDbContext>()
-            .UseSqlServer(_connectionString, b =>
+            .UseMySql(_connectionString, MySqlServerVersion.LatestSupportedServerVersion, b =>
             {
                 b.MigrationsHistoryTable("__ProductService_Migrations");
             });

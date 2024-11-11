@@ -15,7 +15,7 @@ public class SaasServiceDbContextFactory : IDesignTimeDbContextFactory<SaasServi
         SaasServiceEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<SaasServiceDbContext>()
-            .UseSqlServer(GetConnectionStringFromConfiguration(), b =>
+            .UseMySql(GetConnectionStringFromConfiguration(), MySqlServerVersion.LatestSupportedServerVersion, b =>
             {
                 b.MigrationsHistoryTable("__SaasService_Migrations");
             });

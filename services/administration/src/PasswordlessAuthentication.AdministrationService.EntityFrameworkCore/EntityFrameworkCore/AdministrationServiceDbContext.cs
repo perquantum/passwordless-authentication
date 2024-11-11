@@ -59,7 +59,6 @@ public class AdministrationServiceDbContext : AbpDbContext<AdministrationService
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.ConfigureWarnings(w => w.Ignore(SqlServerEventId.SavepointsDisabledBecauseOfMARS));
         base.OnConfiguring(optionsBuilder);
     }
 

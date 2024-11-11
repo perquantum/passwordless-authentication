@@ -1,13 +1,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using PasswordlessAuthentication.ProductService.Products;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.Modularity;
 
 namespace PasswordlessAuthentication.ProductService.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(AbpEntityFrameworkCoreSqlServerModule),
+    typeof(AbpEntityFrameworkCoreMySQLModule),
     typeof(AbpEntityFrameworkCoreModule),
     typeof(ProductServiceDomainModule)
 )]
@@ -32,7 +32,7 @@ public class ProductServiceEntityFrameworkCoreModule : AbpModule
         {
             options.Configure<ProductServiceDbContext>(c =>
             {
-                c.UseSqlServer(b =>
+                c.UseMySQL(b =>
                 {
                     b.MigrationsHistoryTable("__ProductService_Migrations");
                 });

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.Modularity;
 using Volo.Saas.EntityFrameworkCore;
 
@@ -9,7 +9,7 @@ namespace PasswordlessAuthentication.SaasService.EntityFrameworkCore;
 [DependsOn(
     typeof(SaasServiceDomainModule),
     typeof(SaasEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule)
+    typeof(AbpEntityFrameworkCoreMySQLModule)
 )]
 public class SaasServiceEntityFrameworkCoreModule : AbpModule
 {
@@ -32,7 +32,7 @@ public class SaasServiceEntityFrameworkCoreModule : AbpModule
         {
             options.Configure<SaasServiceDbContext>(c =>
             {
-                c.UseSqlServer(b =>
+                c.UseMySQL(b =>
                 {
                     b.MigrationsHistoryTable("__SaasService_Migrations");
                 });

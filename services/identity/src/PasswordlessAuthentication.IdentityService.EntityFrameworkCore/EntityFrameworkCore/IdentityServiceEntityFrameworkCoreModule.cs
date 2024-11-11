@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -11,7 +11,7 @@ namespace PasswordlessAuthentication.IdentityService.EntityFrameworkCore;
     typeof(IdentityServiceDomainModule),
     typeof(AbpIdentityProEntityFrameworkCoreModule),
     typeof(AbpOpenIddictProEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule)
+    typeof(AbpEntityFrameworkCoreMySQLModule)
 )]
 public class IdentityServiceEntityFrameworkCoreModule : AbpModule
 {
@@ -35,7 +35,7 @@ public class IdentityServiceEntityFrameworkCoreModule : AbpModule
         {
             options.Configure<IdentityServiceDbContext>(c =>
             {
-                c.UseSqlServer(b =>
+                c.UseMySQL(b =>
                 {
                     b.MigrationsHistoryTable("__IdentityService_Migrations");
                 });

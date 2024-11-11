@@ -15,7 +15,7 @@ public class AdministrationServiceDbContextFactory : IDesignTimeDbContextFactory
         AdministrationServiceEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<AdministrationServiceDbContext>()
-            .UseSqlServer(GetConnectionStringFromConfiguration(), b =>
+            .UseMySql(GetConnectionStringFromConfiguration(), MySqlServerVersion.LatestSupportedServerVersion, b =>
             {
                 b.MigrationsHistoryTable("__AdministrationService_Migrations");
             });

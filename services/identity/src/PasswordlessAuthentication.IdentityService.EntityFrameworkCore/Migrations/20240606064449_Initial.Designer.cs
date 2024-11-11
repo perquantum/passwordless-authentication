@@ -25,7 +25,6 @@ namespace PasswordlessAuthentication.IdentityService.Migrations
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Volo.Abp.Identity.IdentityClaimType", b =>
                 {

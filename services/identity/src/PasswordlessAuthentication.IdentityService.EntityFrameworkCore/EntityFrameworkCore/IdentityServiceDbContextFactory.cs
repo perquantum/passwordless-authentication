@@ -15,7 +15,7 @@ public class IdentityServiceDbContextFactory : IDesignTimeDbContextFactory<Ident
         IdentityServiceEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<IdentityServiceDbContext>()
-            .UseSqlServer(GetConnectionStringFromConfiguration(), b =>
+            .UseMySql(GetConnectionStringFromConfiguration(), MySqlServerVersion.LatestSupportedServerVersion, b =>
             {
                 b.MigrationsHistoryTable("__IdentityService_Migrations");
             });

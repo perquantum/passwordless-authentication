@@ -2,7 +2,7 @@
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Gdpr;
 using Volo.Abp.LanguageManagement.EntityFrameworkCore;
@@ -15,7 +15,7 @@ namespace PasswordlessAuthentication.AdministrationService.EntityFrameworkCore;
 
 [DependsOn(
     typeof(AdministrationServiceDomainModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule),
+    typeof(AbpEntityFrameworkCoreMySQLModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpFeatureManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
@@ -53,7 +53,7 @@ public class AdministrationServiceEntityFrameworkCoreModule : AbpModule
         {
             options.Configure<AdministrationServiceDbContext>(c =>
             {
-                c.UseSqlServer(b =>
+                c.UseMySQL(b =>
                 {
                     b.MigrationsHistoryTable("__AdministrationService_Migrations");
                 });

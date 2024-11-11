@@ -48,6 +48,7 @@ using Volo.Abp.Security.Claims;
 using Volo.Saas.Host;
 using PasswordlessAuthentication.AuthServer.PasswordlessAuthentication;
 using Volo.Abp.OpenIddict.ExtensionGrantTypes;
+using Microsoft.AspNetCore.Identity;
 
 namespace PasswordlessAuthentication.AuthServer;
 
@@ -205,6 +206,11 @@ public class PasswordlessAuthenticationAuthServerModule : AbpModule
             options.ImpersonationTenantPermission = SaasHostPermissions.Tenants.Impersonation;
             options.ImpersonationUserPermission = IdentityPermissions.Users.Impersonation;
         });
+
+        context.Services
+            .GetObject<IdentityBuilder>()
+            .AddDefaultTokenProviders()
+            .AddPasswordlessLoginProvider();
 
         Configure<AbpOpenIddictExtensionGrantsOptions>(options =>
         {
